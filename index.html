@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday My Love ❤️</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,sans-serif;
+}
+
+body{
+overflow:hidden;
+background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+}
+
+.page{
+width:100vw;
+height:100vh;
+position:absolute;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+}
+
+h1{
+color:white;
+margin-bottom:20px;
+text-shadow:0 0 15px rgba(0,0,0,.3);
+}
+
+.decor{
+position:absolute;
+animation:float 8s linear infinite;
+font-size:30px;
+}
+
+@keyframes float{
+from{transform:translateY(100vh);}
+to{transform:translateY(-150px);}
+}
+
+.cake-container{
+position:relative;
+width:280px;
+height:250px;
+}
+
+.cake-half{
+position:absolute;
+bottom:0;
+width:130px;
+height:150px;
+border-radius:15px;
+background:linear-gradient(to bottom,#7a4b20,#4b250d);
+box-shadow:0 10px 20px rgba(0,0,0,.4);
+transition:1.5s;
+}
+
+.left{left:5px;}
+.right{right:5px;}
+
+.icing{
+height:35px;
+background:linear-gradient(#fff,#ffd1dc);
+border-radius:15px 15px 10px 10px;
+}
+
+.candle{
+position:absolute;
+left:50%;
+top:20px;
+transform:translateX(-50%);
+width:12px;
+height:60px;
+background:white;
+}
+
+.flame{
+position:absolute;
+top:-18px;
+left:50%;
+transform:translateX(-50%);
+width:20px;
+height:20px;
+border-radius:50%;
+background:gold;
+box-shadow:0 0 20px gold;
+animation:flicker .5s infinite alternate;
+}
+
+@keyframes flicker{
+from{transform:translateX(-50%) scale(1);}
+to{transform:translateX(-50%) scale(1.2);}
+}
+
+.split .left{
+transform:translateX(-110px) rotate(-20deg);
+}
+
+.split .right{
+transform:translateX(110px) rotate(20deg);
+}
+
+.cut-btn{
+padding:15px 35px;
+border:none;
+border-radius:40px;
+background:#ff4081;
+color:white;
+font-size:18px;
+cursor:pointer;
+margin-top:30px;
+}
+
+.confetti{
+position:absolute;
+width:10px;
+height:10px;
+animation:fall linear forwards;
+}
+
+@keyframes fall{
+to{
+transform:translateY(110vh) rotate(720deg);
+}
+}
+
+#page2{
+display:none;
+background:linear-gradient(135deg,#ff758c,#ff7eb3);
+color:white;
+}
+
+.love-photo{
+width:220px;
+height:220px;
+border-radius:50%;
+object-fit:cover;
+border:6px solid white;
+box-shadow:0 0 30px rgba(255,255,255,.8);
+margin-bottom:20px;
+animation:pulse 2s infinite alternate;
+}
+
+@keyframes pulse{
+from{transform:scale(1);}
+to{transform:scale(1.05);}
+}
+
+.message{
+opacity:0;
+margin:10px;
+font-size:22px;
+animation:show 1s forwards;
+}
+
+@keyframes show{
+to{
+opacity:1;
+}
+}
+
+.fadeOut{
+animation:fadeOut 1s forwards;
+}
+
+@keyframes fadeOut{
+to{
+opacity:0;
+visibility:hidden;
+}
+}
+</style>
+</head>
+<body>
+
+<audio id="bgMusic" loop>
+<source src="birthday-song.mp3" type="audio/mpeg">
+</audio>
+
+<div class="page" id="page1">
+
+<h1>Happy Birthday My Love ❤️</h1>
+
+<div class="cake-container" id="cake">
+
+<div class="cake-half left">
+<div class="icing"></div>
+</div>
+
+<div class="cake-half right">
+<div class="icing"></div>
+</div>
+
+<div class="candle">
+<div class="flame"></div>
+</div>
+
+</div>
+
+<button class="cut-btn" id="cutBtn">
+🎂 Cut Cake
+</button>
+
+</div>
+
+<div class="page" id="page2">
+
+<h1>I Love You Zainab ❤️</h1>
+
+<img src="zainab.jpg" class="love-photo" alt="Photo">
+
+<div id="messages"></div>
+
+<h2 style="margin-top:25px;">
+Forever Yours ❤️<br>
+Zaim Shah
+</h2>
+
+</div>
+
+<script>
+
+const emojis=["❤️","🎈","🎉","💖","🎊","🥳"];
+
+for(let i=0;i<30;i++){
+let d=document.createElement("div");
+d.className="decor";
+d.innerHTML=emojis[Math.floor(Math.random()*emojis.length)];
+d.style.left=Math.random()*100+"vw";
+d.style.animationDuration=(5+Math.random()*5)+"s";
+document.body.appendChild(d);
+}
+
+document.getElementById("cutBtn").onclick=function(){
+
+document.getElementById("bgMusic").play();
+
+document.getElementById("cake").classList.add("split");
+
+createConfetti(180);
+
+fireworks();
+
+setTimeout(()=>{
+
+document.getElementById("page1").classList.add("fadeOut");
+
+setTimeout(()=>{
+document.getElementById("page1").style.display="none";
+showPage2();
+},1000);
+
+},3000);
+
+};
+
+function createConfetti(count){
+
+const colors=["red","blue","yellow","green","pink","orange"];
+
+for(let i=0;i<count;i++){
+
+let c=document.createElement("div");
+
+c.className="confetti";
+
+c.style.left=Math.random()*100+"vw";
+
+c.style.background=
+colors[Math.floor(Math.random()*colors.length)];
+
+c.style.animationDuration=
+(2+Math.random()*3)+"s";
+
+document.body.appendChild(c);
+
+setTimeout(()=>c.remove(),5000);
+
+}
+}
+
+function fireworks(){
+
+for(let i=0;i<100;i++){
+
+let s=document.createElement("div");
+
+s.style.position="absolute";
+s.style.width="8px";
+s.style.height="8px";
+s.style.borderRadius="50%";
+s.style.background=
+`hsl(${Math.random()*360},100%,50%)`;
+
+s.style.left="50%";
+s.style.top="50%";
+
+document.body.appendChild(s);
+
+let x=(Math.random()-0.5)*900;
+let y=(Math.random()-0.5)*900;
+
+s.animate([
+{transform:"translate(0,0)",opacity:1},
+{transform:`translate(${x}px,${y}px)`,opacity:0}
+],{
+duration:2000
+});
+
+setTimeout(()=>s.remove(),2000);
+
+}
+}
+
+function showPage2(){
+
+document.getElementById("page2").style.display="flex";
+
+const msgs=[
+"Happy Birthday My Beautiful Zainab ❤️",
+"You are the most precious gift in my life 💖",
+"Your smile brightens every moment ✨",
+"Thank you for filling my heart with love 💕",
+"May all your dreams come true 🌹",
+"I promise to love you forever ❤️",
+"Forever Yours 💘",
+"Happy Birthday My Love 🎂❤️"
+];
+
+const container=document.getElementById("messages");
+
+msgs.forEach((m,i)=>{
+
+let div=document.createElement("div");
+
+div.className="message";
+
+div.innerText=m;
+
+div.style.animationDelay=(i*1.5)+"s";
+
+container.appendChild(div);
+
+});
+
+}
+
+setInterval(()=>{
+
+let h=document.createElement("div");
+
+h.innerHTML="❤️";
+
+h.style.position="absolute";
+
+h.style.left=Math.random()*100+"vw";
+
+h.style.bottom="0";
+
+document.body.appendChild(h);
+
+h.animate([
+{transform:"translateY(0)",opacity:1},
+{transform:"translateY(-100vh)",opacity:0}
+],{
+duration:5000
+});
+
+setTimeout(()=>h.remove(),5000);
+
+},500);
+
+</script>
+
+</body>
+</html>
